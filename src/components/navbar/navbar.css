@@ -1,0 +1,25 @@
+.navbar{
+    width: 1920px;
+    height: 65px;
+    background-color: blue;
+    padding: 0 320px;
+}
+.nbContainer{
+    width: 1280px;
+    height: 64px;
+    background-color: black;
+    padding: 0px 24px;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+}
+
+.nbcLogoContainer{
+    width: 124px;
+    height: 42px;
+}
+
+.nbcLogo{
+    width: 124px;
+    height: 42px;
+}

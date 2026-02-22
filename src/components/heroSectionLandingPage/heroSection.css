@@ -1,131 +1,67 @@
+.joinchallengeBtn{
+   background-color: #135BEC;
+   color:white;
+   padding: 18px 32px;
+}
+.exploreCommunitybtn{
+   border: 2px solid #334155;
+   color: #F1F5F9;
+   padding: 18px 32px;
+}
+.colorChange{
+    color: #135BEC;
+}
 .heroSection{
-    width: 1920px;
-    height: 718px;
-    padding: 80px 64px 320px 320px;
+    
+     background: 
+  radial-gradient(
+    circle at center,
+    rgba(19, 91, 236, 0.15) 0%,
+    rgba(19, 91, 236, 0) 50%
+  ),
+  radial-gradient(
+    circle at center,
+    rgba(124, 58, 237, 0.10) 0%,
+    rgba(124, 58, 237, 0) 50%
+  ),#0F172A;
+  height: 100vh;
 }
-
-.hsContainer{
-    width:1280px;
-    height: 574px;
-    display: flex;
-    gap: 48px;
+.live{
+    background: rgba(19, 91, 236, 0.1);
+    border: 1px solid rgba(19, 91, 236, 0.2);
+    
 }
-
-.hstextContent{
-    width:616px;
-    height: 574px;
-    display: flex;
-    flex-direction: column;
+.tagLine{
+    color: white;
+    line-height: 72px;
+    letter-spacing: -1.8px;
 }
-
-.hsVisualSide{
-    width:616px;
-    height: 450px;
-    background-color: black;
-    padding: 32px;
-    border-radius: 16px;
-}
-
-.hsvsImage{
-    width:550px;
-    height:384px;
-}
-
-.hstcLive{
-    width:249px;
-    height:26px;
-    padding: 4px 12px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 20px;
-    background-color: #135BEC;
-
-}
-
-.hstclDot{
-    width:8px;
-    height:8px;
-    background-color: #135BEC;
-    border-radius: 50px;
-}
-
-.hstclText{
-    width:207px;
-    height:16px;
-    font-size: 12px;
-    letter-spacing: 0.6px;
-}
-
-.hstcTagLine{
-   width:616px;
-   height:216px;
-   font-size: 72px;
-   line-height: 72px;
-   letter-spacing: -1.8px;
-  
-}
-
-.hstclbText{
-   width:616px;
-   height:84px;
-   font-size: 20px;
-   line-height: 28px;
-   letter-spacing: 0%;
-  
-}
-
-.hstcButtons{
-   width:616px;
-   height:64px;
-   display: flex;
-   gap: 16px;
-}
-
-.hstcbJCBtn{
-    width:227.02px;
-    height:64px;
-    padding: 18px 32px;
-    border-radius: 12px;
+.jcBtnText{
     font-size: 18px;
-   line-height: 28px;
-   letter-spacing: 0%;
-   display: flex;
-    align-items: center;
-    justify-content: center;
 }
-
-.hstcbECBtn{
-    width:241px;
-    height:64px;
-    padding: 16px 32px;
-    border-radius: 12px;
+.ecBtnText{
     font-size: 18px;
-   line-height: 28px;
-   letter-spacing: 0%;
-   border: 2px;
 }
-
-.hstcJoinedBy{
-    width:616px;
-    height:56px;
-    display: flex;
-    gap: 16px;
-    padding-top: 32px;
+.TgBody{
+    font-size: 20px;
+    color: #94A3B8;
+    letter-spacing: 0.2px;
 }
-
-.hstcjbSvg{
-    width:124px;
-    height:40px;
+.liveText{
+    color: #135BEC;
 }
-
-.hstcjsText{
-    width:258px;
-    height:20px;
+.liveDot{
+    background-color: #135BEC;
+}
+.joinedTxt{
     font-size: 14px;
-   line-height: 20px;
-   letter-spacing: 0%;
+    color: #64748B;
 }
-
-
-
+.imageContainer{
+   background:
+  rgba(15, 23, 42, 0.5),
+  linear-gradient(90deg, #135BEC 0%, #9333EA 100%),#1E293B;
+  border: 1px solid #1E293B;
+  backdrop-filter: blur(4px);
+  
+}
