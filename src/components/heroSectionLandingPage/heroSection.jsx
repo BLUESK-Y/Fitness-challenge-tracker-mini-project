@@ -10,19 +10,19 @@ const heroSection = () => {
             <div className='hstextContent'>
                 <div className='hstcLive'>
                     <div className='hstclDot'></div>
-                    <div className='hstclText'>
-                        <p>LIVE CHALLENGES NOW ACTIVE</p>
-                    </div>
+                    <p className='hstclText'>LIVE CHALLENGES NOW ACTIVE</p>   
                 </div>
                 <h1 className='hstcTagLine'>Push Your Limits.Track Your Progress.</h1>
-                <div className='hstctlBody'>
-                    <p className='hstclbText'>Join thousands of athletes in global fitness challenges. Track
-                       every rep, run, and ride with precision. Elevate your performance
-                       today.
-                    </p>
-                </div>
+                <p className='hstclbText'>Join thousands of athletes in global fitness challenges. Track
+                    every rep, run, and ride with precision. Elevate your performance
+                    today.
+                </p>
+                
                 <div className='hstcButtons'>
-                    <button className='hstcbJCBtn'>Join Challenge <img src={joinChallengeIcon} alt="" className='hstcbjcbtnSvg'/></button>
+                    <button className='hstcbJCBtn'>
+                        <p>Join Challenge</p>
+                        <img src={joinChallengeIcon} alt="" className='hstcbjcbtnSvg'/>
+                    </button>
                     <button className='hstcbECBtn'>Explore Community</button>
                 </div>
                 <div className='hstcJoinedBy'>

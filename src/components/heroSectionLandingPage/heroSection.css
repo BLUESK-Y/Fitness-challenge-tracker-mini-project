@@ -1,0 +1,131 @@
+.heroSection{
+    width: 1920px;
+    height: 718px;
+    padding: 80px 64px 320px 320px;
+}
+
+.hsContainer{
+    width:1280px;
+    height: 574px;
+    display: flex;
+    gap: 48px;
+}
+
+.hstextContent{
+    width:616px;
+    height: 574px;
+    display: flex;
+    flex-direction: column;
+}
+
+.hsVisualSide{
+    width:616px;
+    height: 450px;
+    background-color: black;
+    padding: 32px;
+    border-radius: 16px;
+}
+
+.hsvsImage{
+    width:550px;
+    height:384px;
+}
+
+.hstcLive{
+    width:249px;
+    height:26px;
+    padding: 4px 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 20px;
+    background-color: #135BEC;
+
+}
+
+.hstclDot{
+    width:8px;
+    height:8px;
+    background-color: #135BEC;
+    border-radius: 50px;
+}
+
+.hstclText{
+    width:207px;
+    height:16px;
+    font-size: 12px;
+    letter-spacing: 0.6px;
+}
+
+.hstcTagLine{
+   width:616px;
+   height:216px;
+   font-size: 72px;
+   line-height: 72px;
+   letter-spacing: -1.8px;
+  
+}
+
+.hstclbText{
+   width:616px;
+   height:84px;
+   font-size: 20px;
+   line-height: 28px;
+   letter-spacing: 0%;
+  
+}
+
+.hstcButtons{
+   width:616px;
+   height:64px;
+   display: flex;
+   gap: 16px;
+}
+
+.hstcbJCBtn{
+    width:227.02px;
+    height:64px;
+    padding: 18px 32px;
+    border-radius: 12px;
+    font-size: 18px;
+   line-height: 28px;
+   letter-spacing: 0%;
+   display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.hstcbECBtn{
+    width:241px;
+    height:64px;
+    padding: 16px 32px;
+    border-radius: 12px;
+    font-size: 18px;
+   line-height: 28px;
+   letter-spacing: 0%;
+   border: 2px;
+}
+
+.hstcJoinedBy{
+    width:616px;
+    height:56px;
+    display: flex;
+    gap: 16px;
+    padding-top: 32px;
+}
+
+.hstcjbSvg{
+    width:124px;
+    height:40px;
+}
+
+.hstcjsText{
+    width:258px;
+    height:20px;
+    font-size: 14px;
+   line-height: 20px;
+   letter-spacing: 0%;
+}
+
+
+
