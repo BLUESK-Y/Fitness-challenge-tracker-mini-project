@@ -1,8 +1,16 @@
 import React from 'react'
+import {Navbar,CtaSection,FeaturesSection,HeroSection,Statusbar,Footer} from "./components"
 
 const App = () => {
   return (
-    <div>App</div>
+    <>
+    <Navbar/>
+    <HeroSection/>
+    <Statusbar/>
+    <FeaturesSection/>
+    <CtaSection/>
+    <Footer/>
+    </>
   )
 }
 
