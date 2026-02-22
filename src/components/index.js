@@ -1,6 +1,8 @@
-import navbar from "./navbar/navbar"
-import ctaSection from "./ctaSectionLandingPage/ctaSection"
-import featuresSection from "./featuresSectionLandingPage/featuresSection"
-import heroSection from "./heroSectionLandingPage/heroSection"
-import statusbar from "./statusbarLandingPage/statusbar"
-import footer from "./footer/footer"
+import Navbar from "./navbar/navbar"
+import CtaSection from "./ctaSectionLandingPage/ctaSection"
+import FeaturesSection from "./featuresSectionLandingPage/featuresSection"
+import HeroSection from "./heroSectionLandingPage/heroSection"
+import Statusbar from "./statusbarLandingPage/statusbar"
+import Footer from "./footer/footer"
+
+export {Navbar,CtaSection,FeaturesSection,HeroSection,Statusbar,Footer};
