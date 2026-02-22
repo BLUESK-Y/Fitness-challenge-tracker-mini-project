@@ -1,0 +1,6 @@
+import navbar from "./navbar/navbar"
+import ctaSection from "./ctaSectionLandingPage/ctaSection"
+import featuresSection from "./featuresSectionLandingPage/featuresSection"
+import heroSection from "./heroSectionLandingPage/heroSection"
+import statusbar from "./statusbarLandingPage/statusbar"
+import footer from "./footer/footer"
