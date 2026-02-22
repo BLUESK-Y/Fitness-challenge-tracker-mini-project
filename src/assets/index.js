@@ -1,0 +1,1 @@
+import landingPageImage from "landing page image.png"
