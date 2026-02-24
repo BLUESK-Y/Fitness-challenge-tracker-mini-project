@@ -27,6 +27,26 @@ const AppRoutes = ()=> {
                     </ProtectedRoute>
                 }
             />
+
+            <Route
+                path="/Leaderboard" 
+                element={
+                    <ProtectedRoute>
+                        <Leaderboard/>
+                    </ProtectedRoute>
+                }
+            />
+
+            <Route
+                path="/AICoach" 
+                element={
+                    <ProtectedRoute>
+                        <AICoach/>
+                    </ProtectedRoute>
+                }
+            />
         </Routes>
-    )
-}
+    );
+};
+
+export default AppRoutes;
