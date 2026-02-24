@@ -1,8 +1,9 @@
 import React from 'react'
+import AppNavbar from "../../components/navbar/navbar"
 
 const Challenges = () => {
   return (
-    <div>Challenges</div>
+    <AppNavbar/>
   )
 }
 
