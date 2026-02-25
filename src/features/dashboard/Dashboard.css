@@ -1,0 +1,6 @@
+.activity-card {
+  background: linear-gradient(145deg, #1e293b, #0f172a);
+  border-radius: 20px;
+  padding: 24px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+}

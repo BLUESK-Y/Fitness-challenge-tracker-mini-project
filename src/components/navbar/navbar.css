@@ -75,3 +75,18 @@
   cursor: pointer;
   transition: all 0.3s ease;
 }
+
+@media (max-width: 768px) {
+  .nav-links {
+    margin-top: 15px;
+  }
+
+  .nav-right {
+    margin-top: 15px;
+    justify-content: center;
+  }
+
+  .logout-btn {
+    padding: 6px 12px;
+  }
+}

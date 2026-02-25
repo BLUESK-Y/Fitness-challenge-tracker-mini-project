@@ -1,0 +1,23 @@
+.badge-card {
+  background: #1f2937;
+  padding: 25px;
+  border-radius: 16px;
+  color: white;
+}
+
+.badge-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.badge-item {
+  text-align: center;
+}
+
+.badge-item img {
+  width: 70px;
+  height: 70px;
+  margin-bottom: 10px;
+}
