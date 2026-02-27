@@ -1,6 +1,4 @@
-/* =========================
-   OVERLAY
-========================= */
+/*OVERLAY*/
 .modal-overlay {
   position: fixed;
   inset: 0;
@@ -12,13 +10,11 @@
   z-index: 1000;
 }
 
-/* =========================
-   MODAL CONTAINER
-========================= */
+/* MODAL CONTAINER */
 .modal-box {
   width: 420px;
   max-width: 90%;
-  background: #0b1220; /* deep navy */
+  background: #0b1220; 
   border-radius: 18px;
   padding: 40px;
   box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6);
@@ -26,7 +22,7 @@
   animation: modalFade 0.25s ease-out;
 }
 
-/* Optional subtle border glow */
+/* subtle border glow */
 .modal-box::before {
   content: "";
   position: absolute;
@@ -42,9 +38,7 @@
   pointer-events: none;
 }
 
-/* =========================
-   CLOSE BUTTON
-========================= */
+/*CLOSE BUTTON */
 .modal-close {
   position: absolute;
   top: 18px;
@@ -61,9 +55,7 @@
   color: #ffffff;
 }
 
-/* =========================
-   ANIMATION
-========================= */
+/*ANIMATION*/
 @keyframes modalFade {
   from {
     opacity: 0;

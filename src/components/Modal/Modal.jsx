@@ -2,7 +2,7 @@ import React from "react";
 import "./modal.css";
 
 const Modal = ({ isOpen, onClose, children }) => {
-  // If modal is closed, render nothing
+  
   if (!isOpen) return null;
 
   return (

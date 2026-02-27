@@ -40,9 +40,7 @@ const CalendarView = () => {
   };
 
   const changeMonth = (direction) => {
-    setCurrentDate(
-      new Date(year, month + direction, 1)
-    );
+    setCurrentDate(new Date(year, month + direction, 1));
   };
 
   const monthName = currentDate.toLocaleString("default", {
@@ -52,14 +50,21 @@ const CalendarView = () => {
 
   const days = [];
 
+  // Empty slots before month start
   for (let i = 0; i < firstDay; i++) {
-    days.push(<div key={`empty-${i}`} className="empty"></div>);
+    days.push(
+      <div
+        key={`empty-${year}-${month}-${i}`}
+        className="empty"
+      ></div>
+    );
   }
 
+  // Actual days
   for (let i = 1; i <= totalDays; i++) {
     days.push(
       <div
-        key={i}
+        key={`day-${year}-${month}-${i}`}
         className={`day ${isLoggedDay(i) ? "active" : ""}`}
       >
         {i}
@@ -80,8 +85,8 @@ const CalendarView = () => {
       <p className="month-title">{monthName}</p>
 
       <div className="weekdays">
-        {["S", "M", "T", "W", "T", "F", "S"].map((d) => (
-          <div key={d}>{d}</div>
+        {["S", "M", "T", "W", "T", "F", "S"].map((d, index) => (
+          <div key={`${d}-${index}`}>{d}</div>
         ))}
       </div>
 

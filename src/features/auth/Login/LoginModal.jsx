@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import api from "../../../services/api";
-import "./LoginModal.css"
+import { useNavigate } from "react-router-dom";
 
 /*Validation Schema */
 const schema = yup.object().shape({
@@ -18,6 +18,7 @@ const schema = yup.object().shape({
 });
 
 const LoginModal = ({ switchToSignup, onSuccess }) => {
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -51,6 +52,7 @@ const LoginModal = ({ switchToSignup, onSuccess }) => {
       alert("Login successful!");
 
       if (onSuccess) onSuccess();
+      navigate("/dashboard");
 
     } catch (error) {
       console.error(error);

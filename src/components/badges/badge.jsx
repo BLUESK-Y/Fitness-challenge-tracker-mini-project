@@ -36,7 +36,7 @@ const Badge = () => {
     if (!user) return;
 
     try {
-      const res = await api.get(`/logs?userId=${user.id}`);
+      const res = await api.get(`/Logs?userId=${user.id}`);
       setLogs(res.data);
       evaluateBadges(res.data);
     } catch (err) {
