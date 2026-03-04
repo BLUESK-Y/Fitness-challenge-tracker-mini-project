@@ -40,26 +40,25 @@ const SignupModal = ({ switchToLogin, onSuccess }) => {
 
   /*Submit Function*/
   const onSubmit = async (data) => {
-    try {
-      const newUser = {
-        name: data.name,
-        email: data.email,
-        password: data.password,
-        totalPoints: 0,
-      };
+  try {
+    const newUser = {
+      name: data.name,
+      email: data.email,
+      password: data.password,
+      totalPoints: 0,
+    };
 
-      await api.post("/user", newUser);
+    await api.post("/user", newUser);
+    reset();
 
-      alert("Signup successful!");
-      reset();
+    
+    if (switchToLogin) switchToLogin();
 
-      if (onSuccess) onSuccess(); 
-      
-    } catch (error) {
-      console.error(error);
-      alert("Signup failed");
-    }
-  };
+  } catch (error) {
+    console.error(error);
+    alert("Signup failed");
+  }
+};
 
   return (
     <div>

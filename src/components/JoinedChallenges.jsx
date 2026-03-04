@@ -1,39 +1,37 @@
 import React, { useEffect, useState } from "react";
 import api from "../services/api";
-import ChallengeCard from "../features/challenges/ChallengeCard"; 
+import ChallengeCard from "../features/challenges/ChallengeCard";
+import "./JoinedChallenges.css";
 
 const JoinedChallenges = () => {
   const [joinedChallenges, setJoinedChallenges] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchJoinedChallenges = async () => {
       try {
-        //to check which are joined
-        const detailsRes = await api.get("/challengeDetails");
+        const user = JSON.parse(localStorage.getItem("user"));
+        if (!user) return;
 
-        const joinedDetails = detailsRes.data.filter(
-          (item) => item.status === "Joined"
-        );
+        
+        const [userChallengesRes, challengesRes] = await Promise.all([
+          api.get(`/UserChallenges?userId=${user.id}`).catch((err) => {
+            if (err.response?.status === 404) return { data: [] };
+            throw err;
+          }),
+          api.get("/Challenges"),
+        ]);
 
-        const joinedIds = joinedDetails.map((item) => item.id);
-
-        if (joinedIds.length === 0) {
-          setJoinedChallenges([]);
-          return;
-        }
-
-        // to Get all challenges
-        const challengesRes = await api.get("/Challenges");
-
-        // Filters only joined ones
-        const filtered = challengesRes.data.filter((challenge) =>
-          joinedIds.includes(challenge.id)
+        const joinedIds = userChallengesRes.data.map((uc) => String(uc.challengeId));
+        const filtered = challengesRes.data.filter((c) =>
+          joinedIds.includes(String(c.id))
         );
 
         setJoinedChallenges(filtered);
-
       } catch (error) {
         console.error("Error fetching joined challenges:", error);
+      } finally {
+        setLoading(false);
       }
     };
 
@@ -41,27 +39,22 @@ const JoinedChallenges = () => {
   }, []);
 
   return (
-    <div style={{ marginTop: "40px" }}>
+    <div className="joined-section">
       <h2>My Joined Challenges</h2>
 
-      {joinedChallenges.length === 0 ? (
-        <p>You haven’t joined any challenges yet.</p>
+      {loading ? (
+        <p className="joined-empty">Loading...</p>
+      ) : joinedChallenges.length === 0 ? (
+        <p className="joined-empty">You haven't joined any challenges yet.</p>
       ) : (
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fill, minmax(250px, 1fr))",
-            gap: "20px",
-            marginTop: "20px",
-          }}
-        >
-        {joinedChallenges.map((challenge) => (
-        <ChallengeCard
-          key={challenge.id}
-          challenge={challenge}
-          isJoined={true}  
-        />
-        ))}
+        <div className="joined-grid">
+          {joinedChallenges.map((challenge) => (
+            <ChallengeCard
+              key={challenge.id}
+              challenge={challenge}
+              isJoined={true}
+            />
+          ))}
         </div>
       )}
     </div>

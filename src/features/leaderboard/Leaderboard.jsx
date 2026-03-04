@@ -2,23 +2,31 @@ import React, { useEffect, useState } from "react";
 import api from "../../services/api";
 import "./Leaderboard.css";
 import AppNavbar from "../../components/navbar/navbar";
-import {first,second,third} from "../../assets"
-import Footer from "../../components/footer/footer"
+import { first, second, third } from "../../assets";
+import Footer from "../../components/footer/footer";
+
+const TABS = [
+  { key: "points", label: "Total Points", icon: "🏆" },
+  { key: "steps", label: "Steps Today", icon: "👟" },
+  { key: "calories", label: "Calories Today", icon: "🔥" },
+];
 
 const Leaderboard = () => {
+  const [tab, setTab] = useState("points");
   const [rankings, setRankings] = useState([]);
-  const topThree = rankings.slice(0, 3);
-  const others = rankings.slice(3);
+  const [loading, setLoading] = useState(true);
   const currentUser = JSON.parse(localStorage.getItem("user"));
+
+  const topThree = rankings.slice(0, 3);
 
   useEffect(() => {
     fetchLeaderboard();
-  }, []);
+  }, [tab]);
 
   const fetchLeaderboard = async () => {
+    setLoading(true);
     try {
       const today = new Date().toISOString().split("T")[0];
-
       const [logsRes, usersRes] = await Promise.all([
         api.get("/Logs"),
         api.get("/user"),
@@ -26,158 +34,214 @@ const Leaderboard = () => {
 
       const logs = logsRes.data;
       const users = usersRes.data;
-
-     
       const todayLogs = logs.filter((log) => log.date === today);
 
       
-      const stepMap = {};
-
+      const todayStatsMap = {};
       todayLogs.forEach((log) => {
-        if (!stepMap[log.userId]) {
-          stepMap[log.userId] = 0;
-        }
-        stepMap[log.userId] += Number(log.steps || 0);
+        const uid = String(log.userId);
+        if (!todayStatsMap[uid])
+          todayStatsMap[uid] = { steps: 0, calories: 0, duration: 0 };
+        todayStatsMap[uid].steps += Number(log.steps || 0);
+        todayStatsMap[uid].calories += Number(log.calories || 0);
+        todayStatsMap[uid].duration += Number(log.duration || 0);
       });
 
-      // Convert to leaderboard array
-      const leaderboardData = Object.keys(stepMap).map((userId) => {
-        const user = users.find(
-          (u) => String(u.id) === String(userId)
-        );
+      let leaderboardData = [];
 
-        return {
-          id: userId,
-          name: user?.name || "Unknown",
-          steps: stepMap[userId],
-        };
-      });
+      if (tab === "points") {
+        leaderboardData = users
+          .filter((u) => (u.totalPoints || 0) > 0)
+          .map((u) => {
+            const uid = String(u.id);
+            const ts = todayStatsMap[uid] || { steps: 0, calories: 0, duration: 0 };
+            return { id: uid, name: u.name, value: u.totalPoints || 0, ...ts };
+          });
+      } else {
+        leaderboardData = Object.keys(todayStatsMap).map((userId) => {
+          const user = users.find((u) => String(u.id) === userId);
+          const ts = todayStatsMap[userId];
+          return {
+            id: userId,
+            name: user?.name || "Unknown",
+            value: tab === "steps" ? ts.steps : ts.calories,
+            totalPoints: user?.totalPoints || 0,
+            ...ts,
+          };
+        });
+      }
 
-      // Sort descending
-      leaderboardData.sort((a, b) => b.steps - a.steps);
-
+      leaderboardData.sort((a, b) => b.value - a.value);
       setRankings(leaderboardData);
     } catch (err) {
       console.error(err);
+    } finally {
+      setLoading(false);
     }
   };
 
-  const getInitials = (name) => {
-    const parts = name.split(" ");
-    return (
-      (parts[0]?.[0] || "") +
-      (parts[1]?.[0] || "")
-    ).toUpperCase();
+  const getInitials = (name = "") => {
+    const parts = name.trim().split(" ");
+    return ((parts[0]?.[0] || "") + (parts[1]?.[0] || "")).toUpperCase();
   };
+
+  const formatValue = (val) => {
+    if (tab === "points") return `${val.toLocaleString()} pts`;
+    if (tab === "steps") return `${val.toLocaleString()} steps`;
+    return `${val.toLocaleString()} kcal`;
+  };
+
+  const userRank =
+    rankings.findIndex((r) => String(r.id) === String(currentUser?.id)) + 1;
+
+  // Podium order
+  const podiumSlots = [
+    { player: topThree[1], cls: "second", img: second, height: 150 },
+    { player: topThree[0], cls: "first",  img: first,  height: 190 },
+    { player: topThree[2], cls: "third",  img: third,  height: 130 },
+  ];
 
   return (
     <>
-    <AppNavbar/>
-    <div className="leaderboard-container">
-      <h2>Community Leaderboard</h2>
-      <p>Top performers based on today’s step count</p>
+      <AppNavbar />
+      <div className="lb-page">
 
-      <div className="leaderboard-table">
-        {/* PODIUM SECTION */}
-{topThree.length > 0 && (
-  <div className="podium">
-
-    {/* 2nd Place */}
-    {topThree[1] && (
-      <div className="podium-card second">
-        <div className="rank-badge">
-          <img src={second} alt="" />
-        </div>
-
-        <div className="avatar big">
-          {getInitials(topThree[1].name)}
-        </div>
-
-        <h3>{topThree[1].name}</h3>
-        <p className="steps">{topThree[1].steps.toLocaleString()}</p>
-
-        
-      </div>
-    )}
-
-    {/* 1st Place */}
-    {topThree[0] && (
-      <div className="podium-card first">
-        <div className="trophy">
-          <img src={first} alt="" />
-        </div>
-
-        <div className="avatar biggest">
-          {getInitials(topThree[0].name)}
-        </div>
-
-        <h3>{topThree[0].name}</h3>
-        <p className="steps">{topThree[0].steps.toLocaleString()}</p>
-
-
-      </div>
-    )}
-
-    {/* 3rd Place */}
-    {topThree[2] && (
-      <div className="podium-card third">
-        <div className="rank-badge">
-          <img src={third} alt="" />
-        </div>
-
-        <div className="avatar big">
-          {getInitials(topThree[2].name)}
-        </div>
-
-        <h3>{topThree[2].name}</h3>
-        <p className="steps">{topThree[2].steps.toLocaleString()}</p>
-
-      </div>
-    )}
-
-  </div>
-)}
-        <div className="table-header">
-          <span>Rank</span>
-          <span>User</span>
-          <span>Steps Today</span>
-        </div>
-
-        {rankings.length === 0 && (
-          <div className="no-data">
-            No activity recorded today.
+        {/* HEADER */}
+        <div className="lb-header">
+          <div className="lb-header-text">
+            <h1 className="lb-title">Community Leaderboard</h1>
+            <p className="lb-subtitle">See how you stack up against the community</p>
           </div>
-        )}
+          {currentUser && userRank > 0 && (
+            <div className="lb-rank-pill">
+              <span className="lb-rank-pill-label">Your Rank</span>
+              <span className="lb-rank-pill-num">#{userRank}</span>
+            </div>
+          )}
+        </div>
 
-        {rankings.map((user, index) => (
-          <div
-            key={user.id}
-            className={`table-row ${
-              currentUser?.id === user.id ? "highlight" : ""
-            }`}
-          >
-            <span className="rank">{index + 1}</span>
+        {/* TABS */}
+        <div className="lb-tabs">
+          {TABS.map((t) => (
+            <button
+              key={t.key}
+              className={`lb-tab ${tab === t.key ? "active" : ""}`}
+              onClick={() => setTab(t.key)}
+            >
+              {t.icon} {t.label}
+            </button>
+          ))}
+        </div>
 
-            <div className="user-cell">
-              <div className="avatar">
-                {getInitials(user.name)}
+        {loading ? (
+          <div className="lb-loading">
+            <div className="lb-spinner" />
+            <p>Loading rankings...</p>
+          </div>
+        ) : rankings.length === 0 ? (
+          <div className="lb-empty">
+            <span className="lb-empty-icon">🏜️</span>
+            <p>No data yet</p>
+            <small>
+              {tab !== "points"
+                ? "No activity recorded today."
+                : "No points earned yet."}
+            </small>
+          </div>
+        ) : (
+          <div className="lb-body">
+
+            {/* PODIUM */}
+            {topThree.length >= 1 && (
+              <div className="lb-podium">
+                {podiumSlots.map(({ player, cls, img, height }, i) => {
+                  if (!player) return <div key={i} className="lb-podium-placeholder" />;
+                  const isYou = String(player.id) === String(currentUser?.id);
+                  return (
+                    <div key={player.id} className={`lb-podium-card ${cls} ${isYou ? "is-you" : ""}`}>
+                      <img src={img} alt={cls} className="lb-medal-img" />
+                      <div className={`lb-podium-avatar lb-av-${cls}`}>
+                        {getInitials(player.name)}
+                      </div>
+                      <p className="lb-podium-name">{player.name}</p>
+                      <p className="lb-podium-value">{formatValue(player.value)}</p>
+                      {isYou && <span className="lb-you-chip">You</span>}
+                      <div
+                        className={`lb-podium-base ${cls}`}
+                        style={{ height: `${height}px` }}
+                      />
+                    </div>
+                  );
+                })}
               </div>
-              <span>
-                {user.name}
-                {currentUser?.id === user.id && (
-                  <span className="you-tag">You</span>
-                )}
-              </span>
+            )}
+
+            {/* TABLE */}
+            <div className="lb-table">
+              <div className="lb-table-head">
+                <span>Rank</span>
+                <span>Athlete</span>
+                <span>{tab === "points" ? "Points" : tab === "steps" ? "Steps" : "Calories"}</span>
+                <span>Steps Today</span>
+                <span>Calories</span>
+                <span>Duration</span>
+              </div>
+
+              {rankings.map((user, index) => {
+                const isYou = String(user.id) === String(currentUser?.id);
+                return (
+                  <div
+                    key={user.id}
+                    className={`lb-table-row ${isYou ? "lb-you-row" : ""}`}
+                  >
+                    <span className="lb-rank">
+                      {index === 0
+                        ? "🥇"
+                        : index === 1
+                        ? "🥈"
+                        : index === 2
+                        ? "🥉"
+                        : `#${index + 1}`}
+                    </span>
+
+                    <div className="lb-user-cell">
+                      <div className={`lb-avatar lb-av-${["gold","silver","bronze","blue","purple"][index % 5]}`}>
+                        {getInitials(user.name)}
+                      </div>
+                      <span className="lb-user-name">
+                        {user.name}
+                        {isYou && <span className="lb-you-tag">You</span>}
+                      </span>
+                    </div>
+
+                    <span className="lb-val-primary">{formatValue(user.value)}</span>
+
+                    <span className="lb-val-stat">
+                      {user.steps > 0
+                        ? `👟 ${user.steps.toLocaleString()}`
+                        : <span className="lb-nil">—</span>}
+                    </span>
+
+                    <span className="lb-val-stat">
+                      {user.calories > 0
+                        ? `🔥 ${user.calories.toLocaleString()} kcal`
+                        : <span className="lb-nil">—</span>}
+                    </span>
+
+                    <span className="lb-val-stat">
+                      {user.duration > 0
+                        ? `⏱ ${user.duration} min`
+                        : <span className="lb-nil">—</span>}
+                    </span>
+                  </div>
+                );
+              })}
             </div>
 
-            <span className="steps">
-              {user.steps.toLocaleString()}
-            </span>
           </div>
-        ))}
+        )}
       </div>
-    </div>
-    <Footer/>
+      <Footer />
     </>
   );
 };

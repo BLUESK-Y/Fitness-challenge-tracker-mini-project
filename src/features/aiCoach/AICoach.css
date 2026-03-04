@@ -102,6 +102,38 @@
   cursor: pointer;
   color: white;
 }
+.ai-challenge-suggestions {
+  padding: 8px 0 4px;
+  max-width: 100%;
+}
+
+.suggestion-label {
+  font-size: 13px;
+  color: #60a5fa;
+  font-weight: 600;
+  margin-bottom: 14px;
+  padding-left: 2px;
+}
+
+.suggestion-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 16px;
+}
+
+
+.suggestion-cards .challenge-card {
+  font-size: 13px;
+}
+
+.suggestion-cards .challenge-image {
+  height: 160px;
+}
+
+.suggestion-cards .challenge-title {
+  font-size: 15px;
+}
+
 @media (max-width: 1270px) {
     .ai-container{
         margin: 0 200px;

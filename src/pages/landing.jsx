@@ -29,10 +29,10 @@ function Landing() {
         }}
       />
 
-      <HeroSection />
+      <HeroSection onLoginClick={() => { setIsLogin(true); setOpen(true); }} />
       <StatsSection />
       <WhySection />
-      <CTASection />
+      <CTASection onLoginClick={() => { setIsLogin(true); setOpen(true); }} />
 
       <Modal isOpen={open} onClose={() => setOpen(false)}>
         {isLogin ? (
@@ -105,7 +105,7 @@ const Navbar1 = ({ onLoginClick, onSignupClick }) => (
 );
 
 /* HERO */
-const HeroSection = () => (
+const HeroSection = ({ onLoginClick }) => (
   <section className="heroSection">
     <div className="container heroContainer">
       <div className="row align-items-center">
@@ -127,12 +127,12 @@ const HeroSection = () => (
           </p>
 
           <div className="d-flex gap-3 mt-4">
-            <button className="joinchallengeBtn">
+            <button className="joinchallengeBtn" onClick={onLoginClick}>
               Join Challenge
               <img src={joinChallengeIcon} alt="" width="18" />
             </button>
 
-            <button className="exploreCommunitybtn">
+            <button className="exploreCommunitybtn" onClick={onLoginClick}>
               Explore Leaderboard
             </button>
           </div>
@@ -220,15 +220,15 @@ const WhySection = () => (
 );
 
 /* CTA */
-const CTASection = () => (
+const CTASection = ({ onLoginClick }) => (
   <section className="ctaSection">
     <div className="container text-center">
       <div className="ctaBox">
         <h2>Ready to transform your fitness journey?</h2>
         <p>Join the next global sprint challenge.</p>
         <div className="d-flex justify-content-center gap-3 mt-3">
-          <button className="primaryBtn">Get Started Now</button>
-          <button className="secondaryBtn">Learn More</button>
+          <button className="primaryBtn" onClick={onLoginClick}>Get Started Now</button>
+          <button className="secondaryBtn" onClick={onLoginClick}>Learn More</button>
         </div>
       </div>
     </div>
