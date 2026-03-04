@@ -1,4 +1,4 @@
-/* ── LOADING ──────────────────────────────────────────────────────────────── */
+/*  LOADING  */
 .sc-loading {
   min-height: 100vh;
   background: #0f172a;
@@ -21,7 +21,7 @@
 
 @keyframes spin { to { transform: rotate(360deg); } }
 
-/* ── TOAST ────────────────────────────────────────────────────────────────── */
+/*  TOAST  */
 .sc-toast {
   position: fixed;
   top: 80px;
@@ -43,7 +43,7 @@
   to   { opacity: 1; transform: translateY(0); }
 }
 
-/* ── PAGE ─────────────────────────────────────────────────────────────────── */
+/*  PAGE  */
 .sc-page {
   min-height: 100vh;
   background: #0f172a;
@@ -51,7 +51,7 @@
   font-family: 'Inter', sans-serif;
 }
 
-/* ── HERO ─────────────────────────────────────────────────────────────────── */
+/*  HERO  */
 .sc-hero {
   position: relative;
   height: 460px;
@@ -88,7 +88,7 @@
   line-height: 1.1;
 }
 
-/* ── TAGS ─────────────────────────────────────────────────────────────────── */
+/*TAGS */
 .sc-tags {
   display: flex;
   gap: 10px;
@@ -112,7 +112,7 @@
   color: #4ade80;
 }
 
-/* ── COACH ROW ────────────────────────────────────────────────────────────── */
+/* COACH ROW  */
 .sc-coach-row {
   display: flex;
   align-items: center;
@@ -135,7 +135,7 @@
 
 .sc-rating small { color: #94a3b8; }
 
-/* ── BODY GRID ────────────────────────────────────────────────────────────── */
+/* BODY GRID */
 .sc-body {
   max-width: 1200px;
   margin: 70px auto 100px;
@@ -143,20 +143,20 @@
   display: grid;
   grid-template-columns: 2fr 1fr;
   gap: 60px;
-  align-items: start; /* ✅ CRITICAL: prevents right column from stretching */
+  align-items: start; 
 }
 
-/* ── RIGHT COLUMN WRAPPER ─────────────────────────────────────────────────── */
+/*  RIGHT COLUMN WRAPPER  */
 .sc-right-col {
-  position: sticky;        /* ✅ sticky on the column wrapper */
-  top: 90px;               /* ✅ clears the navbar */
-  align-self: flex-start;  /* ✅ stops it stretching to left col height */
+  position: sticky;        
+  top: 90px;                
+  align-self: flex-start;   
   display: flex;
   flex-direction: column;
   gap: 24px;
 }
 
-/* ── PROGRESS PANEL ───────────────────────────────────────────────────────── */
+/*  PROGRESS PANEL  */
 .sc-progress-panel {
   background: rgba(37, 99, 235, 0.07);
   border: 1px solid rgba(37, 99, 235, 0.2);

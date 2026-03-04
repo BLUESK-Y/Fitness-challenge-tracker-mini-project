@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import api from "../../../services/api";
-import "./singleChallenge.css";
+import "./SingleChallenge.css";
 import AppNavbar from "../../../components/navbar/navbar";
 import Footer from "../../../components/footer/footer";
 
